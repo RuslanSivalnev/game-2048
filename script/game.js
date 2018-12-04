@@ -11,7 +11,7 @@ class Game {
         // gameFieldElement.className ='game';
         // parentElement.appendChild(gameFieldElement);
         let headerElement = createAndAppend({
-            className:'header',
+            className: 'header',
             parentElement: gameFieldElement
         })
 
@@ -22,15 +22,17 @@ class Game {
         let fieldElement = createAndAppend({
             className: 'field',
             parentElement: gameFieldElement
-        })      
-     
+        })
+
+        this.field = [];
 
         for (let i = 0; i < size; i++) {
-            for (let k = 0; k < size; k++){
-              new Cell(fieldElement);
+            this.field[i] = [];
+            for (let k = 0; k < size; k++) {
+                this.field[i][k] = new Cell(fieldElement);
 
-                
+
             }
-        }
+        }         
     }
 }

@@ -1,7 +1,7 @@
-let createAndAppend = function({className, parentElement, value, tag}={className, parentElement, value, tag: 'div'}){
+let createAndAppend = function ({ className, parentElement, value }, tag = 'div') {
     let element = document.createElement(tag);
     element.className = className;
-    if(value){
+    if (value) {
         element.innerHTML = value
     };
     parentElement.appendChild(element);
