@@ -1,6 +1,7 @@
 //создает поле,предоставит методы для установки значений и автоматически перересовутет их
 class Cell {
-    constructor(fieldElement) {
+    constructor(fieldElement, game) {
+        this.game = game;  // для опции рейтинга
         this.element = createAndAppend({
             className: 'cell',
             parentElement: fieldElement
@@ -21,13 +22,17 @@ class Cell {
     set value(value) {
         this._value = value;
         this.element.innerHTML = value ? value : ''; //если ноль тогда пустая строка.
+        this.element.setAttribute('data-ship', value);
     }
 
     clear() {                    //очищает значени
         this.value = '';
     }
 
-    merge(cell) {        // умножает 
+    merge(cell) {        // умножает  // передаем родительскому классу 'сигнал' о рейтинге
+        if(this.value){
+            this.game.addRating(this.value + cell.value);
+        } 
         this.value += cell.value;
         cell.clear();
     }

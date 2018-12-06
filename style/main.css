@@ -15,13 +15,14 @@ html, body {
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-image: url(./bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
     .game .header{
         height: 20vmin;
         width: 80vmin;
         font-size: 10vmin;
-        background-color: white;
         box-sizing: border-box;
         border-bottom: 1px solid black;
     }
@@ -43,8 +44,54 @@ html, body {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10vmin;
+            font-size: 9vmin;
+            background: #eee4da;
 
 
+        }
+
+        .game .field .cell[data-ship = "2"]{
+            background: #eee4da;
+        
+        }
+        .game .field .cell[data-ship = "4"]{
+            background: #ede0c8;
+        }
+        .game .field .cell[data-ship = "8"]{
+            color: #f9f6f2;
+            background: #f2b179;
+
+        }
+        .game .field .cell[data-ship = "16"]{
+            color: #f9f6f2;
+            background: #f59563;
+        }
+        .game .field .cell[data-ship = "32"]{
+            color: #f9f6f2;
+            background: #f67c5f;
+        }
+        .game .field .cell[data-ship = "64"]{
+            color: #f9f6f2;
+            background: #f65e3b;
+        }
+        .game .field .cell[data-ship = "128"]{
+            color: #f9f6f2;
+            background: #edcf72;
+        }
+        .game .field .cell[data-ship = "256"]{
+            color: #f9f6f2;
+            background: #edcc61;
+        }
+        .game .field .cell[data-ship = "512"]{
+            color: #f9f6f2;
+            background: #edc850;
+        }
+        .game .field .cell[data-ship = "1024"]{
+            color: #f9f6f2;
+            background: #edc53f;
+        }
+        .game .field .cell[data-ship = "2048"]{
+            color: #f9f6f2;
+            background: #3c3a32;
         }
 

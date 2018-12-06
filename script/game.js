@@ -11,14 +11,12 @@ class Game {
         // let gameFieldElement = document.createElement('div');
         // gameFieldElement.className ='game';
         // parentElement.appendChild(gameFieldElement);
-        let headerElement = createAndAppend({
+        this.headerElement = createAndAppend({
             className: 'header',
             parentElement: gameFieldElement
         })
 
         this.rating = 0;
-
-        headerElement.innerHTML = `Rating: ${this.rating}`;
 
         let fieldElement = createAndAppend({
             className: 'field',
@@ -27,14 +25,13 @@ class Game {
 
         this.field = [];
 
-        for (let i = 0; i < size; i++) {
+        for (let i = 0; i < size; i++) { // цикл на создания поля.
             this.field[i] = [];
             for (let k = 0; k < size; k++) {
-                this.field[i][k] = new Cell(fieldElement);
-
-
+                this.field[i][k] = new Cell(fieldElement, this); // чтоб в cell было видно game(родительский класс)
             }
         }
+        
         window.onkeyup = function(e){
             switch(e.keyCode){
                 case 38: this.moveUp();
@@ -56,7 +53,7 @@ class Game {
     spawnUnit() {
         let emptyCells = [];  // получаем массив пустых селов.
 
-        for (let i = 0; i < this.field.length; i++) {
+        for (let i = 0; i < this.field.length; i++) { // создает элемент и пушит его в поле
             for (let k = 0; k < this.field[i].length; k++) {
                 if (!this.field[i][k].value) {
                     emptyCells.push(this.field[i][k])
@@ -66,9 +63,22 @@ class Game {
         //  по вызову метода добовлям 2 или 4 в рандомный сеел.
         if (emptyCells.length) {
             emptyCells[getRandomInt(0, emptyCells.length - 1)].spawn();
-        } else alert('tou lose')
+        } else alert('to u lose')
         
     }
+
+    set rating(value){
+        this._rating = value;
+        this.headerElement.innerHTML = `Rating: ${value}`;    
+    }
+
+    get rating(){
+        return this._rating;
+    }
+    addRating(value){
+        this.rating += value
+    }
+    
     
     isLastKey(key) {
         return key == (this.size - 1);
