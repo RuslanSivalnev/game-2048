@@ -21,11 +21,12 @@ html, body {
     background-repeat: no-repeat;
 }
     .game .header{
-        height: 20vmin;
+        height: 15vmin;
         width: 80vmin;
         font-size: 10vmin;
         box-sizing: border-box;
-        border-bottom: 1px solid black;
+        text-align: center;
+        color: #f67c5f
     }
     .game .field{
         z-index: 1;
@@ -38,11 +39,10 @@ html, body {
         
     }
         .game .field .cell{
-            height: 18vmin;
-            width: 18vmin;
+            /* height: 18vmin;
+            width: 18vmin; */
             box-sizing: border-box;
             margin: 1vmin;
-            /* border: 2px solid green; */
             border-radius: 2vmin;
             display: flex;
             align-items: center;
@@ -59,12 +59,10 @@ html, body {
 
         @keyframes hide {
             from {opacity: 1;}
-            to {opacity: 0;}
+            to {opacity: 0.1;}
             }
         .game .field .cell.highlight{
-            margin: 0;
-            height: 20vmin;
-            width: 20vmin;
+         margin: 0;
         }
 
         .game .field .cell.animate{

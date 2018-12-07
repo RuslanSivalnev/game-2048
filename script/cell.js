@@ -8,6 +8,9 @@ class Cell {
             parentElement: fieldElement
         });
 
+        this.element.style.width = this.game.cellSize + 'vmin'
+        this.element.style.height = this.game.cellSize + 'vmin'
+
         if (Math.random() > 0.8) {
             this.spawn();
         }
@@ -55,14 +58,20 @@ class Cell {
 
     highlight() {
         this.element.className = 'cell highlight';
+
+        this.element.style.width = this.game.cellSize + 2 + 'vmin'
+        this.element.style.height = this.game.cellSize + 2 + 'vmin'
+
         let highlightTime = 200;
         let highlightStartTime = new Date();
         this.highlightStartTIme = highlightStartTime;
 
         setTimeout(() => {
-            if (highlightStartTime == this.highlightStartTIme){
+            if (highlightStartTime == this.highlightStartTIme) {
                 this.element.className = 'cell'
-            }  
+                this.element.style.width = this.game.cellSize + 'vmin'
+                this.element.style.height = this.game.cellSize + 'vmin'
+            }
         }, highlightTime)
     }
 }
@@ -72,7 +81,9 @@ class Cell {
 class AnimateCell {
     constructor(fromCell, toCell) { // первая ячейка вторая ячейка 
         this.element = createAndAppend({ className: 'cell animate' });
-
+       
+        this.element.style.width = fromCell.game.cellSize + 'vmin'
+        this.element.style.height = fromCell.game.cellSize + 'vmin'
 
         this.element.style.top = fromCell.element.offsetTop + 'px';
         this.element.style.left = fromCell.element.offsetLeft + 'px';
@@ -82,13 +93,9 @@ class AnimateCell {
         this.element.style.top = toCell.element.offsetTop + 'px';
         this.element.style.left = toCell.element.offsetLeft + 'px';
 
-        // setTimeout(function(){
-        //     fromCell.fieldElement.removeChild(this.element)
-        // }.bind(this),400)
-
         setTimeout(() => {
             fromCell.fieldElement.removeChild(this.element)
-        }, 1000)
+        }, 200)
     }
 }
 

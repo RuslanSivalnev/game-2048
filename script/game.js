@@ -2,8 +2,10 @@
 class Game {
     //генираци поля по разметке html
 
-    constructor(parentElement, { size = 4 }) {
+    constructor(parentElement, size = 4) {
+        this.fieldSize = 80;
         this.size = size;
+        this.cellSize = (this.fieldSize/this.size)-2  // -2 margin
         let gameFieldElement = createAndAppend({
             className: 'game',
             parentElement

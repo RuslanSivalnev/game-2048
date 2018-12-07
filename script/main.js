@@ -14,4 +14,6 @@ let getRandomInt = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let game = new Game(document.body, 4);
+let fieldSize = prompt("Size board?", 4);
+
+let game = new Game(document.body, fieldSize);
