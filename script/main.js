@@ -4,7 +4,8 @@ let createAndAppend = function ({ className, parentElement, value }, tag = 'div'
     if (value) {
         element.innerHTML = value
     };
-    parentElement.appendChild(element);
+    if(parentElement){
+    parentElement.appendChild(element);}
 
     return element;
 }

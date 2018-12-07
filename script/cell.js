@@ -2,6 +2,7 @@
 class Cell {
     constructor(fieldElement, game) {
         this.game = game;  // для опции рейтинга
+        this.fieldElement = fieldElement;
         this.element = createAndAppend({
             className: 'cell',
             parentElement: fieldElement
@@ -30,10 +31,13 @@ class Cell {
     }
 
     merge(cell) {        // умножает  // передаем родительскому классу 'сигнал' о рейтинге
-        if(this.value){
+        if (this.value) {
             this.game.addRating(this.value + cell.value);
-        } 
+        }
+        new AnimateCell(cell, this);
+
         this.value += cell.value;
+        this.highlight()
         cell.clear();
     }
 
@@ -48,4 +52,50 @@ class Cell {
     get isEmpty() {
         return this.value == 0;
     }
+
+    highlight() {
+        this.element.className = 'cell highlight';
+        let highlightTime = 200;
+        let highlightStartTime = new Date();
+        this.highlightStartTIme = highlightStartTime;
+
+        setTimeout(() => {
+            if (highlightStartTime == this.highlightStartTIme){
+                this.element.className = 'cell'
+            }  
+        }, highlightTime)
+    }
 }
+
+
+
+class AnimateCell {
+    constructor(fromCell, toCell) { // первая ячейка вторая ячейка 
+        this.element = createAndAppend({ className: 'cell animate' });
+
+
+        this.element.style.top = fromCell.element.offsetTop + 'px';
+        this.element.style.left = fromCell.element.offsetLeft + 'px';
+
+        fromCell.fieldElement.appendChild(this.element);
+
+        this.element.style.top = toCell.element.offsetTop + 'px';
+        this.element.style.left = toCell.element.offsetLeft + 'px';
+
+        // setTimeout(function(){
+        //     fromCell.fieldElement.removeChild(this.element)
+        // }.bind(this),400)
+
+        setTimeout(() => {
+            fromCell.fieldElement.removeChild(this.element)
+        }, 1000)
+    }
+}
+
+
+
+
+
+
+
+

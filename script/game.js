@@ -32,7 +32,7 @@ class Game {
             }
         }
         
-        window.onkeyup = function(e){
+        window.addEventListener('keyup',function(e){
             switch(e.keyCode){
                 case 38: this.moveUp();
                     break;
@@ -46,7 +46,8 @@ class Game {
                 case 37: this.moveLeft();
                     break;
             }
-        }.bind(this); 
+        }.bind(this));
+       
         
     }
 
