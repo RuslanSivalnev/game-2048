@@ -170,9 +170,9 @@ class Game {
 
     moveDown() {
         let hasMoved = false;
-        for (let k = 0; k < this.size; k++) {
-            for (let i = this.size - 2; i >= 0; i--) {
-                let cuurentCell = this.field[i][k];
+        for (let i = this.size - 2; i >= 0; i--) {
+            for (let k = 0; k < this.size; k++) {
+            let cuurentCell = this.field[i][k];
                 if (cuurentCell.isEmpty) {
                     continue;
                 }
@@ -205,8 +205,8 @@ class Game {
 
     moveUp() {
         let hasMoved = false;
-        for (let k = 0; k < this.size; k++) {
-            for (let i = 1; i < this.size; i++) {
+        for (let i = 1; i < this.size; i++) {
+            for (let k = 0; k < this.size; k++) {
                 let cuurentCell = this.field[i][k];
                 if (cuurentCell.isEmpty) {
                     continue;
