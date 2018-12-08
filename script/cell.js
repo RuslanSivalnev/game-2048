@@ -1,3 +1,8 @@
+let setCellSize = function(cellElement, size){ // хэлпер для динамической задачи размера cell
+    cellElement.style.height = size +'vmin'
+    cellElement.style.width = size +'vmin'
+}
+
 //создает поле,предоставит методы для установки значений и автоматически перересовутет их
 class Cell {
     constructor(fieldElement, game) {
@@ -7,9 +12,8 @@ class Cell {
             className: 'cell',
             parentElement: fieldElement
         });
-
-        this.element.style.width = this.game.cellSize + 'vmin'
-        this.element.style.height = this.game.cellSize + 'vmin'
+        
+        setCellSize(this.element, this.game.cellSize)
 
         if (Math.random() > 0.8) {
             this.spawn();
@@ -20,13 +24,13 @@ class Cell {
     }
 
     get value() {
-        return this._value || 0 //что б небыло в пустых клетка NaN
+        return this._value || 0 //чтобы не было в пустых cell  NaN
     }
 
     set value(value) {
         this._value = value;
         this.element.innerHTML = value ? value : ''; //если ноль тогда пустая строка.
-        this.element.setAttribute('data-ship', value);
+        this.element.setAttribute('data-ship', value); // для привязки css (картинки)
     }
 
     clear() {                    //очищает значени
@@ -39,9 +43,9 @@ class Cell {
         }
         new AnimateCell(cell, this);
 
-        this.value += cell.value;
-        this.highlight()
-        cell.clear();
+        this.value += cell.value; 
+        this.highlight() // запускает анимацию
+        cell.clear(); 
     }
 
     isSameTo(cell) {
@@ -58,9 +62,8 @@ class Cell {
 
     highlight() {
         this.element.className = 'cell highlight';
-
-        this.element.style.width = this.game.cellSize + 2 + 'vmin'
-        this.element.style.height = this.game.cellSize + 2 + 'vmin'
+        setCellSize(this.element, this.game.cellSize + 2)
+     
 
         let highlightTime = 200;
         let highlightStartTime = new Date();
@@ -69,8 +72,7 @@ class Cell {
         setTimeout(() => {
             if (highlightStartTime == this.highlightStartTIme) {
                 this.element.className = 'cell'
-                this.element.style.width = this.game.cellSize + 'vmin'
-                this.element.style.height = this.game.cellSize + 'vmin'
+                setCellSize(this.element, this.game.cellSize)
             }
         }, highlightTime)
     }
@@ -79,11 +81,9 @@ class Cell {
 
 
 class AnimateCell {
-    constructor(fromCell, toCell) { // первая ячейка вторая ячейка 
+    constructor(fromCell, toCell) { // первая, вторая ячейка 
         this.element = createAndAppend({ className: 'cell animate' });
-       
-        this.element.style.width = fromCell.game.cellSize + 'vmin'
-        this.element.style.height = fromCell.game.cellSize + 'vmin'
+        setCellSize(this.element, fromCell.game.cellSize)   
 
         this.element.style.top = fromCell.element.offsetTop + 'px';
         this.element.style.left = fromCell.element.offsetLeft + 'px';

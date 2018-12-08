@@ -2,10 +2,11 @@
 class Game {
     //генираци поля по разметке html
 
-    constructor(parentElement, size = 4) {
+    constructor(parentElement, size) {
         this.fieldSize = 80;
         this.size = size;
         this.cellSize = (this.fieldSize/this.size)-2  // -2 margin
+       
         let gameFieldElement = createAndAppend({
             className: 'game',
             parentElement
@@ -13,11 +14,17 @@ class Game {
         // let gameFieldElement = document.createElement('div');
         // gameFieldElement.className ='game';
         // parentElement.appendChild(gameFieldElement);
+        
         this.headerElement = createAndAppend({
             className: 'header',
             parentElement: gameFieldElement
         })
 
+        this.ratingElement = createAndAppend({
+            className: 'rating',
+            parentElement: this.headerElement
+        })
+        
         this.rating = 0;
 
         let fieldElement = createAndAppend({
@@ -27,7 +34,7 @@ class Game {
 
         this.field = [];
 
-        for (let i = 0; i < size; i++) { // цикл на создания поля.
+        for (let i = 0; i < size; i++) { // цикл поля.
             this.field[i] = [];
             for (let k = 0; k < size; k++) {
                 this.field[i][k] = new Cell(fieldElement, this); // чтоб в cell было видно game(родительский класс)
@@ -63,7 +70,7 @@ class Game {
                 }
             }
         }
-        //  по вызову метода добовлям 2 или 4 в рандомный сеел.
+        //  по вызову метода добовлям 2 или 4 в рандомный сел.
         if (emptyCells.length) {
             emptyCells[getRandomInt(0, emptyCells.length - 1)].spawn();
         } else alert('to u lose')
@@ -72,7 +79,7 @@ class Game {
 
     set rating(value){
         this._rating = value;
-        this.headerElement.innerHTML = `Rating: ${value}`;    
+        this.ratingElement.innerHTML = `Rating: ${value}`;    
     }
 
     get rating(){
